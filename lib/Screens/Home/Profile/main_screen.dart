@@ -1,11 +1,18 @@
 
 import 'dart:math';
 
+import 'package:expensetracker/data/data.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -224,6 +231,78 @@ class MainScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20,),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: Transactiondata.length,
+                  itemBuilder: (context, int i){
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: [
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    width:50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color:Transactiondata[i]["color"],
+                                      shape: BoxShape.circle,
+
+                                    ),
+                                  ),
+                                  Transactiondata[i]["icon"]
+                                ],
+                              ),
+                              SizedBox(width: 10,),
+                              Text(Transactiondata[i]['name'],
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Theme.of(context).colorScheme.onBackground,
+                                    fontWeight: FontWeight.w500
+
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left:140.0),
+                                child: Column(
+                                  children: [
+                                    Text(Transactiondata[i]["total amount"],
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).colorScheme.onBackground,
+                                          fontWeight: FontWeight.w400
+
+                                      ),
+                                    ),
+                                    Text(Transactiondata[i]["date"],
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).colorScheme.outline,
+                                          fontWeight: FontWeight.w400
+
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+              ),
+            )
           ],
         ),
       ),

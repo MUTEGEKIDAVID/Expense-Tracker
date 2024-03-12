@@ -1,32 +1,63 @@
 
 import 'dart:math';
 
+import 'package:expensetracker/Screens/stats/stats.dart';
 import 'package:flutter/material.dart';
 
 import 'main_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  var widgetList=[
+    MainScreen(),
+  StatScreen()
+
+  ];
+  Color selectedcolor= Colors.blue;
+  Color unselectedcolor= Colors.grey;
+
+
+
+  int _currentindex=0;
+
+  void changeIndex(value){
+    setState(() {
+      _currentindex=value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(),
-      body: MainScreen(),
+      body: widgetList[_currentindex],
       bottomNavigationBar: BottomNavigationBar(
+        onTap:(value)=> changeIndex(value),
         backgroundColor: Colors.white,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedItemColor: Colors.yellow,
         elevation: 3,
         items: [
           BottomNavigationBarItem
             (
-            icon: Icon(Icons.home),
-            label: 'home'
+            icon: Icon(Icons.home,
+            color:_currentindex==0 ? selectedcolor : unselectedcolor
+            ),
+            label: 'home',
+
           ),
           BottomNavigationBarItem
             (
-              icon: Icon(Icons.auto_graph),
+              icon: Icon(Icons.auto_graph,
+                  color:_currentindex==1 ? selectedcolor : unselectedcolor
+              ),
             label:'stats '
           ),
 
