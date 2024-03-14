@@ -65,11 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        shape: CircleBorder(),
         child: Container(
           width: 60,
             height:60,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+               shape: BoxShape.circle,
+
               gradient: LinearGradient(
                 colors: [
                   Theme.of(context).colorScheme.primary,

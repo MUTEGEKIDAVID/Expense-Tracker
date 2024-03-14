@@ -271,7 +271,7 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left:140.0),
+                                padding: const EdgeInsets.only(left:130.0),
                                 child: Column(
                                   children: [
                                     Text(Transactiondata[i]["total amount"],
