@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:expensetracker/Screens/stats/stats.dart';
 import 'package:flutter/material.dart';
 
+import '../add_expanse/views/add_expanse.dart';
 import 'main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -83,7 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ),
             child: const Icon(Icons.add)),
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context)=>AddExpanse()));
+        },
       ),
     );
   }
