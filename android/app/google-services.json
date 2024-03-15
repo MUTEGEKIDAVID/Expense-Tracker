@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1029582835304",
+    "project_id": "expanse-tracker-172f0",
+    "storage_bucket": "expanse-tracker-172f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029582835304:android:965a7850e3b200b87a75dd",
+        "android_client_info": {
+          "package_name": "com.example.expensetracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSrGs2diuW5k-te-Nxu9tqeUCuIfr1RYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
