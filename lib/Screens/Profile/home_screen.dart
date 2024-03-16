@@ -1,8 +1,11 @@
 
 import 'dart:math';
 
+import 'package:expanse_repository/expanse_repository.dart';
 import 'package:expensetracker/Screens/stats/stats.dart';
+import 'package:expensetracker/blocs/create_category_bloc/create_category_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../add_expanse/views/add_expanse.dart';
 import 'main_screen.dart';
@@ -87,7 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: (){
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (BuildContext context)=>AddExpanse()));
+              MaterialPageRoute(builder: (BuildContext context)=>  BlocProvider(
+  create: (_) => CreateCategoryBloc(
+      FirebaseExpanseRepo()
+  ),
+  child:Builder(
+    builder: (context) {
+      return const AddExpanse();
+    }
+  ),
+)));
         },
       ),
     );

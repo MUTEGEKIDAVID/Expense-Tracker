@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCZISS-C1ro919tkMjZ9d0WMsHPsKffDyQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1029582835304</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.expensetracker</string>
+	<key>PROJECT_ID</key>
+	<string>expanse-tracker-172f0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>expanse-tracker-172f0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1029582835304:ios:67ce4431384d22997a75dd</string>
+</dict>
+</plist>

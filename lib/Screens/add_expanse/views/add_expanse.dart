@@ -1,7 +1,11 @@
+import 'package:expanse_repository/expanse_repository.dart';
+import 'package:expensetracker/blocs/create_category_bloc/create_category_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 class AddExpanse extends StatefulWidget {
   const AddExpanse({super.key});
 
@@ -87,12 +91,16 @@ class _AddExpanseState extends State<AddExpanse> {
                   size: 16,),
                 suffixIcon: IconButton(
                   onPressed: (){
-                    showDialog(context: context, builder: (cxt){
+                    showDialog(context: context,
+                        builder: (cxt){
                       bool isExpanded = false;
                       String iconSelected ='';
                       late Color categorycolor=Colors.white;
+                      TextEditingController categoryNameController= new TextEditingController();
+                      TextEditingController categoryIconController= new TextEditingController();
+                      TextEditingController categorycolorController= new TextEditingController();
                       return StatefulBuilder(
-                        builder: (context,setState) {
+                        builder: (cxt,setState) {
                           return AlertDialog(
                             title: Center(
                               child: Text("Create Category", style: TextStyle(
@@ -105,6 +113,7 @@ class _AddExpanseState extends State<AddExpanse> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 TextFormField(
+                                  controller: categoryNameController,
                                   //controller: dateController,
 
                                   readOnly: false,
@@ -124,7 +133,7 @@ class _AddExpanseState extends State<AddExpanse> {
                                 ),
                                 SizedBox(height: 16,),
                                 TextFormField(
-                                  //controller: dateController,
+                                  controller: categoryIconController,
                                   onTap: () {
                                     setState(() {
                                       isExpanded = !isExpanded;
@@ -199,49 +208,52 @@ class _AddExpanseState extends State<AddExpanse> {
                                 ) : Container(),
                                 SizedBox(height: 16,),
                                 TextFormField(
-                                  //controller: dateController,
+                                  controller: categorycolorController,
                                   onTap: (){
                                     showDialog(
                                         context: context,
                                         builder: (cxt2){
-                                          return AlertDialog(
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                ColorPicker(
-                                                  pickerColor: Colors.blue,
-                                                  onColorChanged: (Color value) {
-                                                    setState((){
-                                                      categorycolor=value;
-                                                    });
+                                          return BlocProvider.value(
+                                            value:context.read<CreateCategoryBloc>(),
+                                            child: AlertDialog(
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  ColorPicker(
+                                                    pickerColor: Colors.blue,
+                                                    onColorChanged: (Color value) {
+                                                      setState((){
+                                                        categorycolor=value;
+                                                      });
 
-                                                  },
+                                                    },
 
-                                                ),
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  height: 50,
-                                                  child:TextButton(
-                                                      style: TextButton.styleFrom(
+                                                  ),
+                                                  SizedBox(
+                                                    width: double.infinity,
+                                                    height: 50,
+                                                    child:TextButton(
+                                                        style: TextButton.styleFrom(
 
-                                                        backgroundColor: Colors.black,
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius: BorderRadius.circular(12)
+                                                          backgroundColor: Colors.black,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(12)
+                                                          ),
+
+
                                                         ),
-
-
-                                                      ),
-                                                      onPressed: (){
-                                                        Navigator.pop(cxt2);
-                                                      },
-                                                      child:Text("Save",
-                                                        style: TextStyle(
-                                                            fontSize: 12,
-                                                            color: Colors.white
-                                                        ),
-                                                      )
-                                                  ),                                                )
-                                              ],
+                                                        onPressed: (){
+                                                          Navigator.pop(cxt2);
+                                                        },
+                                                        child:Text("Save",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              color: Colors.white
+                                                          ),
+                                                        )
+                                                    ),                                                )
+                                                ],
+                                              ),
                                             ),
                                           );
                                         });
@@ -277,7 +289,16 @@ class _AddExpanseState extends State<AddExpanse> {
                                       ),
                                       onPressed: (){
                                         //create category and pop
-                                        Navigator.pop(context);
+                                        Category categ =Category.empty;
+                                        categ.CategoryID= Uuid().v1();
+                                        categ.name= categoryNameController.text;
+                                        categ.icon= iconSelected;
+                                        categ.color= categorycolor.toString();
+
+                                        context.read<CreateCategoryBloc>().add(createCategory( category: categ));
+
+
+                                        //Navigator.pop(context);
                                       },
                                       child:Text("Save",
                                         style: TextStyle(
